@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle qasm-circuit-preview",
+        "command": "qasm-circuit-preview:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "qasm-circuit-preview",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "qasm-circuit-preview:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
