@@ -4,7 +4,8 @@ import sys
 
 if __name__ == "__main__":
 
-    path = sys.argv[1];
+    path = sys.argv[1]
+    reverse_bits = sys.argv[2]=="true"
 
     if path[-5:].lower() != ".qasm":
         print("WARNING: File Extension Not that of a QASM file [.qasm]\n", path)
@@ -15,13 +16,13 @@ if __name__ == "__main__":
         style = {}
         dark_style = {'backgroundcolor': '#000000', 'gatecolor': '#ffffff', 'linecolor': '#ffffff', 'textcolor': '#ffffff', 'compress': True}
 
-        figure = circuit.draw(output="mpl", style=style, plot_barriers=True, reverse_bits=False)
+        figure = circuit.draw(output="mpl", style=style, plot_barriers=True, reverse_bits=reverse_bits)
         figure.tight_layout()
         figure.savefig('/Users/tareqdandachi/delete/qcp_light.png')
 
         plt.style.use("dark_background")
 
-        figure_dark = circuit.draw(output="mpl", style=dark_style, plot_barriers=True, reverse_bits=False) #add save as button
+        figure_dark = circuit.draw(output="mpl", style=dark_style, plot_barriers=True, reverse_bits=reverse_bits) #add save as button
         figure_dark.tight_layout()
         figure_dark.savefig('/Users/tareqdandachi/delete/qcp_dark.png')
 

@@ -4,12 +4,20 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
+@bottom-space: 100px;
+
 .qasm-circuit-preview {
-  overflow: scroll;
+  overflow: hidden;
   font-family: monospace;
   white-space: pre-wrap;
-  min-height: 300px;
-  max-height: 90vh;
+}
+
+.qasm-circuit-preview .content {
+  overflow: scroll;
+  min-height: 100%;
+  max-height: 100%;
+  padding-bottom: @bottom-space;
+  margin-bottom: calc(-1px * @bottom-space+20px);
 }
 
 .qasm-circuit-preview .message {
@@ -20,15 +28,23 @@
   width: 100%;
 }
 
+.btn {
+  font-family: sans-serif;
+  position: relative;
+  bottom: 0;
+  display: block;
+}
+
 .loader {
   display: inline-block;
-  position: relative;
+  position: absolute;
   width: 80px;
   height: 80px;
   left: 50%;
+  top: 25vh;
   margin-left: -40px;
   margin-bottom: -180px;
-  margin-top: 100px;
+  margin-top: -40px;
 }
 .loader div {
   position: absolute;
