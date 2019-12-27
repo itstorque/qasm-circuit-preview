@@ -3,8 +3,7 @@
   "main": "./lib/qasm-circuit-preview",
   "version": "0.0.0",
   "description": "A short description of your package",
-  "keywords": [
-  ],
+  "keywords": [],
   "activationCommands": {
     "atom-workspace": "qasm-circuit-preview:toggle"
   },
@@ -13,6 +12,6 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-  }
+  "activationHooks": ["language-qasm:grammar-used"],
+  "dependencies": {}
 }
