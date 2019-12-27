@@ -6,8 +6,8 @@ if __name__ == "__main__":
 
     path = sys.argv[1];
 
-    if path[-5:].lower() != "qasm":
-        print("WARNING: File Extension Not that of a QASM file [.qasm]")
+    if path[-5:].lower() != ".qasm":
+        print("WARNING: File Extension Not that of a QASM file [.qasm]\n", path)
 
     try:
         circuit = QuantumCircuit.from_qasm_file(path)
