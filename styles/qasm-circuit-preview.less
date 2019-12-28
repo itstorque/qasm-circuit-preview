@@ -95,3 +95,57 @@
     transform: translate(24px, 0);
   }
 }
+
+.qasm-circuit-preview .content input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.qasm-circuit-preview .content .tab {
+  width: 100%;
+  overflow: hidden;
+}
+.qasm-circuit-preview .content label {
+  justify-content: space-between;
+  padding: 1em 0;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+.qasm-circuit-preview .content label::after {
+  content: "\276F";
+  width: 1em;
+  height: 1em;
+  padding-left: 0.5em;
+  text-align: center;
+  transition: all .35s;
+  display: inline-block;
+  position: absolute;
+}
+.qasm-circuit-preview .content .tab-content {
+  max-height: 0;
+  padding: 0 1em;
+  transition: all .35s;
+  overflow: hidden;
+}
+.qasm-circuit-preview .content .tab-close {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em;
+  font-size: 0.75em;
+  cursor: pointer;
+}
+
+.qasm-circuit-preview .content input:checked + label::after {
+  -webkit-transform: rotate(90deg) translateX(0.2em) translateY(0.2em);
+  transform: rotate(90deg) translateX(0.2em) translateY(0.2em);
+  transform-origin: bottom right;
+  padding: 0;
+  margin-bottom: 1em;
+}
+.qasm-circuit-preview .content input:checked ~ .tab-content {
+  max-height: 100vh;
+  padding: 1em;
+}
