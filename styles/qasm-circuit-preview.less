@@ -159,8 +159,13 @@
   max-height: 100vh;
   padding: 0;
 }
-.qasm-circuit-preview .content .tab-content div {
+.qasm-circuit-preview .content .tab-content div:not(.graph_container) {
   margin-left: 1.5em;
+}
+
+.qasm-circuit-preview select {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
 }
 
 .error {
@@ -181,7 +186,5 @@
 }
 
 .error:empty {
-
   display: none;
-
 }
