@@ -1,6 +1,7 @@
 from qiskit import QuantumCircuit
 import matplotlib as plt
 import sys
+import os
 
 from qiskit import QuantumRegister, ClassicalRegister
 from qiskit import Aer, execute
@@ -8,6 +9,11 @@ from qiskit.tools.visualization import plot_histogram
 from qiskit.providers.aer import StatevectorSimulator
 
 if __name__ == "__main__":
+    
+    temp_path = sys.argv[0].split("helpers")[0]+"temp/"
+
+    try: os.mkdir(temp_path)
+    except: pass
 
     path = sys.argv[1]
     reverse_bits = sys.argv[2]=="true"
@@ -27,7 +33,7 @@ if __name__ == "__main__":
 
         figure = circuit.draw(output="mpl", style=style, plot_barriers=True, reverse_bits=reverse_bits)
         figure.tight_layout()
-        figure.savefig('/Users/tareqdandachi/delete/qcp_light.png')
+        figure.savefig(temp_path + 'qcp_light.png')
 
         print("LOG> Rendered Circuit")
 
@@ -44,16 +50,16 @@ if __name__ == "__main__":
         print("LOG> Calculated Counts:", counts)
 
         figure_statevector = plot_histogram(counts, title='Bell-State counts')
-        figure_statevector.savefig('/Users/tareqdandachi/delete/statevector_light.png')
+        figure_statevector.savefig(temp_path + 'statevector_light.png')
 
         plt.style.use("dark_background")
 
         figure_dark = circuit.draw(output="mpl", style=dark_style, plot_barriers=True, reverse_bits=reverse_bits) #add save as button
         figure_dark.tight_layout()
-        figure_dark.savefig('/Users/tareqdandachi/delete/qcp_dark.png')
+        figure_dark.savefig(temp_path + 'qcp_dark.png')
 
         figure_statevector = plot_histogram(counts, title='Bell-State counts')
-        figure_statevector.savefig('/Users/tareqdandachi/delete/statevector_dark.png')
+        figure_statevector.savefig(temp_path + 'statevector_dark.png')
 
     except Exception as e:
 

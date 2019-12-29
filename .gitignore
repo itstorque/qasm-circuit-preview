@@ -5,3 +5,5 @@ test/
 /test/
 test
 test.qasm
+temp/*
+/temp/*
