@@ -4,7 +4,7 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
-@bottom-space: 100px;
+@bottom-space: 250px;
 
 .qasm-circuit-preview {
   overflow: hidden;
@@ -33,6 +33,14 @@
   position: relative;
   bottom: 0;
   display: block;
+}
+
+.qasm-circuit-preview .button_container {
+
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+
 }
 
 .loader {
@@ -104,48 +112,76 @@
 .qasm-circuit-preview .content .tab {
   width: 100%;
   overflow: hidden;
+  text-align: left;
 }
 .qasm-circuit-preview .content label {
   justify-content: space-between;
   padding: 1em 0;
   font-weight: bold;
   cursor: pointer;
-  text-align: center;
   width: 100%;
   display: block;
 }
-.qasm-circuit-preview .content label::after {
+.qasm-circuit-preview .content label::before {
   content: "\276F";
   width: 1em;
   height: 1em;
   padding-left: 0.5em;
   text-align: center;
-  transition: all .35s;
+  transition: all .1s;
   display: inline-block;
-  position: absolute;
+  margin-right: 12px;
+  margin-left: 8px;
+  font-size: 0.8em;
 }
 .qasm-circuit-preview .content .tab-content {
   max-height: 0;
-  padding: 0 1em;
-  transition: all .35s;
+  padding: 0;
+  transition: all .1s;
   overflow: hidden;
 }
 .qasm-circuit-preview .content .tab-close {
   display: flex;
   justify-content: flex-end;
-  padding: 1em;
+  padding: 0;
   font-size: 0.75em;
   cursor: pointer;
 }
 
-.qasm-circuit-preview .content input:checked + label::after {
-  -webkit-transform: rotate(90deg) translateX(0.2em) translateY(0.2em);
-  transform: rotate(90deg) translateX(0.2em) translateY(0.2em);
-  transform-origin: bottom right;
+.qasm-circuit-preview .content input:checked + label::before {
+  -webkit-transform: rotate(90deg) translateY(-0.4em);
+  transform: rotate(90deg) translateY(-0.4em);
+  transform-origin: 50% 50%;
   padding: 0;
   margin-bottom: 1em;
 }
 .qasm-circuit-preview .content input:checked ~ .tab-content {
   max-height: 100vh;
+  padding: 0;
+}
+.qasm-circuit-preview .content .tab-content div {
+  margin-left: 1.5em;
+}
+
+.error {
+
+  background-color: #ffe8e6;
+  margin: 1em;
+  border-radius: .3rem;
   padding: 1em;
+  color: #db2828;
+  box-shadow: 0 0 0 1px #db2828 inset, 0 0 0 0 transparent;
+  font-weight: 500;
+  display: block;
+
+}
+
+.error::first-line {
+  font-weight: 900;
+}
+
+.error:empty {
+
+  display: none;
+
 }

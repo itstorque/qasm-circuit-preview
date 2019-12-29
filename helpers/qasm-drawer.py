@@ -20,8 +20,10 @@ if __name__ == "__main__":
 
         print("LOG> Parsed QASM Successfully")
 
-        style = {}
-        dark_style = {'backgroundcolor': '#000000', 'linecolor': '#ffffff', 'textcolor': '#ffffff'}
+        plt.pyplot.margins(tight=True)
+
+        style = {'fold': 10, 'compress': True}
+        dark_style = {'backgroundcolor': '#000000', 'linecolor': '#ffffff', 'textcolor': '#ffffff', 'compress': True, 'fold': 10}
 
         figure = circuit.draw(output="mpl", style=style, plot_barriers=True, reverse_bits=reverse_bits)
         figure.tight_layout()
