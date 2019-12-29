@@ -5,7 +5,7 @@ import os
 
 from qiskit import QuantumRegister, ClassicalRegister
 from qiskit import Aer, execute
-from qiskit.tools.visualization import plot_histogram
+from qiskit.tools.visualization import plot_histogram, plot_state_qsphere, plot_state_city, plot_state_paulivec, plot_state_hinton
 from qiskit.providers.aer import StatevectorSimulator
 
 from qiskit.dagcircuit import DAGCircuit
@@ -47,6 +47,61 @@ def dag(circuit):
     image = Image.open(temppath("dag_light.png"))
     inverted_image = PIL.ImageOps.invert(image.convert('L'))
     inverted_image.save(temppath("dag_dark.png"))
+
+def calc_statevector(circuit):
+
+    backend = Aer.get_backend('statevector_simulator')
+    job = execute(circuit, backend).result()
+
+    return job.get_statevector(circuit)
+
+def hinton(statevector):
+
+    dark_style(False)
+
+    figure = plot_state_hinton(statevector)
+    figure.savefig(temppath('hinton_light.png'))
+
+    dark_style(True)
+
+    figure = plot_state_hinton(statevector)
+    figure.savefig(temppath('hinton_dark.png'))
+
+def paulivec(statevector):
+
+    dark_style(False)
+
+    figure = plot_state_paulivec(statevector)
+    figure.savefig(temppath('pauli_vector_representation_light.png'))
+
+    dark_style(True)
+
+    figure = plot_state_paulivec(statevector)
+    figure.savefig(temppath('pauli_vector_representation_dark.png'))
+
+def qsphere(statevector):
+
+    dark_style(False)
+
+    figure = plot_state_qsphere(statevector)
+    figure.savefig(temppath('qsphere_representation_light.png'))
+
+    dark_style(True)
+
+    figure = plot_state_qsphere(statevector)
+    figure.savefig(temppath('qsphere_representation_dark.png'))
+
+def city(statevector):
+
+    dark_style(False)
+
+    figure = plot_state_city(statevector)
+    figure.savefig(temppath('density_matrix_cityscape_light.png'))
+
+    dark_style(True)
+
+    figure = plot_state_city(statevector)
+    figure.savefig(temppath('density_matrix_cityscape_dark.png'))
 
 def temppath(filename):
 
@@ -99,7 +154,12 @@ if __name__ == "__main__":
 
         bell_state_counts(circuit)
         dag(circuit)
-        dag(circuit)
+
+        statevector = calc_statevector(circuit)
+        hinton(statevector)
+        paulivec(statevector)
+        qsphere(statevector)
+        city(statevector)
 
     except Exception as e:
 

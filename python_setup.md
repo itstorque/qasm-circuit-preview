@@ -1,5 +1,6 @@
 # Installs
 
-* qiskit [run `pip3 install qiskit`]
-* pydot [run `pip3 install pydot`]
+* qiskit [run `pip install qiskit`]
+* pydot [run `pip install pydot`]
 * graphviz [run `brew install graphviz` or `apt-get install graphviz`]
+* seaborn [run `pip install seaborn`]
