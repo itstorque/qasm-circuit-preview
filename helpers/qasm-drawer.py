@@ -120,8 +120,15 @@ if __name__ == "__main__":
     if path[-5:].lower() != ".qasm":
         print("WARNING: File Extension Not that of a QASM file [.qasm]\n", path)
 
+    completeCircuitParsing = False
+    completeCircuitDrawing = False
+    completeCircuitQASMSim = False
+    completeCircuitStateVecSim = False
+
     try:
         circuit = QuantumCircuit.from_qasm_file(path)
+
+        completeCircuitParsing = True
 
         print("LOG> Parsed QASM Successfully")
 
@@ -142,6 +149,8 @@ if __name__ == "__main__":
         figure_dark.tight_layout()
         figure_dark.savefig(temppath('circuit_dark.png'))
 
+        completeCircuitDrawing = True
+
         plt.style.use("default")
 
         print("LOG> Rendered Circuit")
@@ -155,12 +164,26 @@ if __name__ == "__main__":
         bell_state_counts(circuit)
         dag(circuit)
 
+        completeCircuitQASMSim = True
+
         statevector = calc_statevector(circuit)
         hinton(statevector)
         paulivec(statevector)
         qsphere(statevector)
         city(statevector)
 
+        completeCircuitStateVecSim = True
+
     except Exception as e:
 
-        print("ERROR> drawing file:", sys.argv[1] + ":\n\n", e)
+        if not completeCircuitParsing:
+            print("ERROR> Error parsing file:", sys.argv[1] + ":\n\n", e + "\n\nAre you sure this is a QASM file?")
+
+        elif not completeCircuitDrawing:
+            print("ERROR> Error drawing file:", sys.argv[1] + ":\n\n", e)
+
+        elif not completeCircuitQASMSim:
+            print("ERROR> Failed simulating circuit:", sys.argv[1] + ":\n\n", e)
+
+        elif not completeCircuitQASMSim:
+            print("ERROR> Failed statevector simulations:", sys.argv[1] + ":\n\n", e)
