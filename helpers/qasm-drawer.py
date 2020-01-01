@@ -15,6 +15,7 @@ from PIL import Image
 import PIL.ImageOps
 
 temp_path = "ERROR"
+logfile = ""
 
 def dark_style(dark):
 
@@ -26,7 +27,7 @@ def bell_state_counts(circuit):
     result = execute(circuit, simulator).result()
     counts = result.get_counts(circuit)
 
-    print("LOG> Calculated Counts:", counts)
+    log(["LOG> Calculated Counts:", counts])
 
     dark_style(False)
 
@@ -107,9 +108,27 @@ def temppath(filename):
 
     return temp_path+filename
 
+def log(data):
+
+    print(*data)
+
+    data = [str(out) for out in data]
+
+    # logfile.write("\n".join(data))
+
+    with open(logfile, 'a') as file:
+        file.write("\n" + " ".join(data))
+
 if __name__ == "__main__":
 
     temp_path = sys.argv[0].split("helpers")[0]+"temp/"
+
+    # sys.stdout = open(, 'w')
+
+    logfile = temp_path+"logs"
+
+    with open(logfile, 'w') as file:
+        file.write("--- QASM LOGS ---")
 
     try: os.mkdir(temp_path)
     except: pass
@@ -118,7 +137,7 @@ if __name__ == "__main__":
     reverse_bits = sys.argv[2]=="true"
 
     if path[-5:].lower() != ".qasm":
-        print("WARNING: File Extension Not that of a QASM file [.qasm]\n", path)
+        log(["WARNING: File Extension Not that of a QASM file [.qasm]\n", path])
 
     completeCircuitParsing = False
     completeCircuitDrawing = False
@@ -130,7 +149,7 @@ if __name__ == "__main__":
 
         completeCircuitParsing = True
 
-        print("LOG> Parsed QASM Successfully")
+        log(["LOG> Parsed QASM Successfully"])
 
         plt.pyplot.margins(tight=True)
 
@@ -153,37 +172,44 @@ if __name__ == "__main__":
 
         plt.style.use("default")
 
-        print("LOG> Rendered Circuit")
+        log(["LOG> Rendered Circuit"])
 
-        print("SIZE>", circuit.size())
-        print("DEPTH>", circuit.depth())
-        print("WIDTH>", circuit.width())
-        print("OP_BREAKDOWN>", circuit.count_ops())
-        print("TENSOR_FACTORS>", circuit.num_tensor_factors())
+        log(["SIZE>", circuit.size()])
+        log(["DEPTH>", circuit.depth()])
+        log(["WIDTH>", circuit.width()])
+        log(["OP_BREAKDOWN>", circuit.count_ops()])
+        log(["TENSOR_FACTORS>", circuit.num_tensor_factors()])
 
         bell_state_counts(circuit)
         dag(circuit)
 
+        log(["LOG> QASM Simulator Complete"])
+
         completeCircuitQASMSim = True
 
         statevector = calc_statevector(circuit)
+
+        log(["LOG> Finsihed Calculating Statevector"])
+
         hinton(statevector)
         paulivec(statevector)
         qsphere(statevector)
         city(statevector)
+
+        log(["LOG> Finished Statevector Simulation"])
 
         completeCircuitStateVecSim = True
 
     except Exception as e:
 
         if not completeCircuitParsing:
-            print("ERROR> Error parsing file:", sys.argv[1] + ":\n\n", e + "\n\nAre you sure this is a QASM file?")
+            log(["ERROR> Error parsing file:", sys.argv[1] + ":\n\n", e + "\n\nAre you sure this is a QASM file?"])
 
         elif not completeCircuitDrawing:
-            print("ERROR> Error drawing file:", sys.argv[1] + ":\n\n", e)
+            log(["ERROR> Error drawing file:", sys.argv[1] + ":\n\n", e])
 
         elif not completeCircuitQASMSim:
-            print("ERROR> Failed simulating circuit:", sys.argv[1] + ":\n\n", e)
+            log(["ERROR> Failed simulating circuit:", sys.argv[1] + ":\n\n", e])
 
         elif not completeCircuitQASMSim:
-            print("ERROR> Failed statevector simulations:", sys.argv[1] + ":\n\n", e)
+            log(["ERROR> Failed statevector simulations:", sys.argv[1] + ":\n\n", e])
