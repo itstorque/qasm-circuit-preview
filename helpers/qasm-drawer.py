@@ -2,6 +2,7 @@ from qiskit import QuantumCircuit
 import matplotlib as plt
 import sys
 import os
+import glob
 
 from qiskit import QuantumRegister, ClassicalRegister
 from qiskit import Aer, execute
@@ -15,7 +16,6 @@ from PIL import Image
 import PIL.ImageOps
 
 temp_path = "ERROR"
-logfile = ""
 
 def dark_style(dark):
 
@@ -112,29 +112,18 @@ def log(data):
 
     print(*data)
 
-    data = [str(out) for out in data]
-
-    # logfile.write("\n".join(data))
-
-    with open(logfile, 'a') as file:
-        file.write("\n" + " ".join(data))
+    sys.stdout.flush()
 
 if __name__ == "__main__":
 
     temp_path = sys.argv[0].split("helpers")[0]+"temp/"
-
-    # sys.stdout = open(, 'w')
-
-    logfile = temp_path+"logs"
-
-    with open(logfile, 'w') as file:
-        file.write("--- QASM LOGS ---")
 
     try: os.mkdir(temp_path)
     except: pass
 
     path = sys.argv[1]
     reverse_bits = sys.argv[2]=="true"
+    hard_reset = sys.argv[3]=="true"
 
     if path[-5:].lower() != ".qasm":
         log(["WARNING: File Extension Not that of a QASM file [.qasm]\n", path])
@@ -145,7 +134,15 @@ if __name__ == "__main__":
     completeCircuitStateVecSim = False
 
     try:
+
         circuit = QuantumCircuit.from_qasm_file(path)
+
+        if hard_reset:
+
+            files = glob.glob(temp_path + '*')
+
+            for f in files:
+                os.remove(f)
 
         completeCircuitParsing = True
 
