@@ -1,4 +1,4 @@
-## 0.1.0 - First Release
+## 1.0.0 - First Release
 * Convert QASM code into circuit
 * Simulate circuit and get counts
 * Draw statevector graphs, denisty matrix plots and more
