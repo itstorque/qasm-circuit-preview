@@ -1,7 +1,7 @@
 {
   "name": "qasm-circuit-preview",
   "main": "./lib/qasm-circuit-preview",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "An atom plugin to preview QASM (Quantum Assembly) circuits",
   "keywords": [
     "QASM",
@@ -10,7 +10,8 @@
     "Circuit",
     "Simulator",
     "Preview",
-    "Drawer"],
+    "Drawer"
+  ],
   "activationCommands": {
     "atom-workspace": "qasm-circuit-preview:toggle"
   },
@@ -19,6 +20,8 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "activationHooks": ["language-qasm:grammar-used"],
+  "activationHooks": [
+    "language-qasm:grammar-used"
+  ],
   "dependencies": {}
 }
