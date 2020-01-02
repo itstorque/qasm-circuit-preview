@@ -1,3 +1,5 @@
 ## 0.1.0 - First Release
-* Every feature added
-* Every bug fixed
+* Convert QASM code into circuit
+* Simulate circuit and get counts
+* Draw statevector graphs, denisty matrix plots and more
+* Get a DAG plot and circuit details, such as size, depth and # of tensor factors

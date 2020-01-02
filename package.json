@@ -1,13 +1,20 @@
 {
   "name": "qasm-circuit-preview",
   "main": "./lib/qasm-circuit-preview",
-  "version": "0.0.0",
-  "description": "A short description of your package",
-  "keywords": [],
+  "version": "0.1.0",
+  "description": "An atom plugin to preview QASM (Quantum Assembly) circuits",
+  "keywords": [
+    "QASM",
+    "Quantum",
+    "Assembly",
+    "Circuit",
+    "Simulator",
+    "Preview",
+    "Drawer"],
   "activationCommands": {
     "atom-workspace": "qasm-circuit-preview:toggle"
   },
-  "repository": "https://github.com/atom/qasm-circuit-preview",
+  "repository": "https://github.com/tareqdandachi/qasm-circuit-preview",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
