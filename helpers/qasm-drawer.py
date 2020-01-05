@@ -200,7 +200,7 @@ if __name__ == "__main__":
     except Exception as e:
 
         if not completeCircuitParsing:
-            log(["ERROR> Error parsing file:", sys.argv[1] + ":\n\n", e + "\n\nAre you sure this is a QASM file?"])
+            log(["ERROR> Error parsing file:", sys.argv[1] + ":\n\n", e, "\n\nAre you sure this is a QASM file?"])
 
         elif not completeCircuitDrawing:
             log(["ERROR> Error drawing file:", sys.argv[1] + ":\n\n", e])
